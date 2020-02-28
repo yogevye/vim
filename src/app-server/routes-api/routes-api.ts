@@ -1,6 +1,6 @@
 import {IProvider} from '../../interfaces/iprovider';
-import {ProvidersManager} from '../../providers--manager/providers-manager';
 import {checkAppointmentsParams, ICheckRes} from "../../utils/check-params";
+import {ProviderHandler} from "../../providers--manager/provider-handler";
 
 export class RoutesApi{
     initRoutes(app: any) {
@@ -14,7 +14,7 @@ export class RoutesApi{
             let {specialty, date, minScore} = req.query;
             let checkRes:ICheckRes = checkAppointmentsParams(specialty, Number(date), Number(minScore));
             if(checkRes.res){
-                let providers:IProvider[] = ProvidersManager.getFilterAResults(specialty, date, minScore)
+                let providers:IProvider[] = ProviderHandler.getProvidersByFilters(specialty, Number(date), Number(minScore));
                 res.status(200).send(providers);
             } else {
                 res.status(400).send(checkRes.message)

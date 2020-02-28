@@ -1,9 +1,9 @@
 import app from './app-server/app';
-import {ProvidersManager} from "./providers--manager/providers-manager";
+import {ProviderHandler} from './providers--manager/provider-handler';
 
 function run(){
     const port = 3500;
-    ProvidersManager.init();
+    ProviderHandler.init();
     app.register(require('fastify-cors'), {
         origin: '*',
         credentials: true,

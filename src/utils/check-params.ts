@@ -1,3 +1,6 @@
+import {IProvider} from '../interfaces/iprovider';
+import {IAvailableDates} from '../interfaces/iavailableDates';
+
 export function checkAppointmentsParams(specialty, date, minScore): ICheckRes {
     try {
         isString(specialty, 'specialty');
@@ -22,7 +25,7 @@ function isNumber(value, key: string) {
 }
 
 function isString(value, key: string) {
-    if (typeof value !== 'string') {
+    if (typeof value !== 'string' || value === '') {
         throw new Error(`${key} should be string. ${key}: ${value}`)
     }
 }
